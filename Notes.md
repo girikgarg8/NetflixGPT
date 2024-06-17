@@ -32,3 +32,19 @@ We'll start by identifying the requirements and desired features in our frontend
 
 ## NetflixGPT Episode-1 Part-2
 
+We start by creating a bare-bones for the different components like Body, Header, Login and Browse. 
+
+Let's also set up routing in the application. For now, we'll map the route '/' to Login component and '/browse' route to Browse component. We'll work on making the '/browse' route protected later. In order to set up routing in the React app, we'll leverage React Router DOM Library.
+
+We start by designing the Login component. This component needs quite a bit of styling (which needs lots of trial and error), hence used it the same way as the instructor did. However, here's an interesting summary about CSS positions which helped a lot:
+
+![CSS-position](./public/assets/CSS-position-summary.png)
+
+This summary is taken as a comment from this [video](https://www.youtube.com/watch?v=jx5jmI0UlXU).
+
+Don't fret too much about the CSS, just try to understand the different properties being used in Login component. Moreover, the CSS for such designs are just a Google search away, so no worries on that part.
+
+Let's now work on creating a sign up form. We can re-use the login form as a sign up form. We can create a state variable `isSignInForm` which stores information about whether the form is a sign-in form or not. According to the value of this state variable, we modify the verbiage on the form. The value of the state variable is toggled on click of the button due to the onClick callback passed to it.
+
+Let's take a look at form validations : By the way, if we have a form with many fields, and we need to handle form validations and error handling, it's recommended to use a form handling library like Formik which makes things convenient.
+

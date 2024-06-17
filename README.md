@@ -2,7 +2,7 @@ The following set of features that we'll be developing in our project have been 
 
 # Features
 - Login/Sign Up feature
-
+    - Header
     - Sign In/Sign up form
     - Redirect to browse page after successful login
 
