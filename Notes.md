@@ -57,3 +57,13 @@ We have a usecase to validate the email ID and password when the user signs in/s
 1. Use state variables for email and password, and bind them with the input field values. However, there is a drawback in this approach: Everytime the input field value changes, the state variable changes, which triggers a re-render of the component. This impacts the performance of the application.
 
 2. useRef is a React hook that is used to reference a value that's not needed for re-rendering. As an example, we do not want to trigger a re-render of the application everytime the input field values for email and password changes. So, we can create a reference to these input fields and use the values whenever required.
+
+## Lecture-1 Part-4
+
+Setting up Firebase, as well as deploying the frontend web app to Firebase.
+
+## Lecture-1 Part-5
+
+Let's now set up authentication using Firebase. We can refer the documentation of Firebase for this, it's quite informative. 
+
+We are able to set up Firebase for both sign in and sign up functionalities. The next step after a user signs in or signs up successfully should be to navigate to '/browse' route, we'll be working on this next.

@@ -1,6 +1,17 @@
 import React, { useState, useRef } from "react";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "@firebase/auth";
 import Header from "./Header";
 import { validateData } from "../utils/validate";
+import { auth } from "../utils/firebase";
+import {
+  GENERIC_ERROR_MESSAGE,
+  INVALID_CREDENTIALS_ERROR_CODE,
+  INVALID_CREDENTIALS_ERROR_MESSAGE,
+} from "../constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -14,6 +25,35 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   };
 
+  async function signUp() {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      );
+      const user = userCredential.user;
+    } catch (error) {
+      setErrorMessage(GENERIC_ERROR_MESSAGE);
+    }
+  }
+
+  async function signIn() {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      );
+      const user = userCredential.user;
+    } catch (error) {
+      const errorCode = error.code;
+      if (errorCode === INVALID_CREDENTIALS_ERROR_CODE)
+        setErrorMessage(INVALID_CREDENTIALS_ERROR_MESSAGE);
+      else setErrorMessage(GENERIC_ERROR_MESSAGE);
+    }
+  }
+
   const handleButtonClick = () => {
     const validationResult = validateData(
       email.current.value,
@@ -21,7 +61,12 @@ const Login = () => {
     );
     if (validationResult instanceof Error) {
       setErrorMessage(validationResult.message);
+      return;
     }
+    // in case the data is valid, we want to sign in/sign up the user.
+    setErrorMessage(null);
+    if (isSignInForm) signIn();
+    else signUp();
   };
 
   return (
