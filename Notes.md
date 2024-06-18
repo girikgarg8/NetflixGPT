@@ -48,3 +48,12 @@ Let's now work on creating a sign up form. We can re-use the login form as a sig
 
 Let's take a look at form validations : By the way, if we have a form with many fields, and we need to handle form validations and error handling, it's recommended to use a form handling library like Formik which makes things convenient.
 
+## Lecture-1 Part-3
+
+Let us look at validating the form in the data (like email, password) using Regex. We'll also learn the usecase of `useRef` hook while doing this.
+
+We have a usecase to validate the email ID and password when the user signs in/signs up on the form. Now, how do we keep track of the email ID and password submitted through the input form. We can use the following two approaches:
+
+1. Use state variables for email and password, and bind them with the input field values. However, there is a drawback in this approach: Everytime the input field value changes, the state variable changes, which triggers a re-render of the component. This impacts the performance of the application.
+
+2. useRef is a React hook that is used to reference a value that's not needed for re-rendering. As an example, we do not want to trigger a re-render of the application everytime the input field values for email and password changes. So, we can create a reference to these input fields and use the values whenever required.
