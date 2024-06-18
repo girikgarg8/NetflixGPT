@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "@firebase/auth";
@@ -11,12 +10,13 @@ import {
   GENERIC_ERROR_MESSAGE,
   INVALID_CREDENTIALS_ERROR_CODE,
   INVALID_CREDENTIALS_ERROR_MESSAGE,
+  NETFLIX_BACKGROUND_URL,
 } from "../constants";
-
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-
+  const navigate = useNavigate();
   const user = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
@@ -32,7 +32,7 @@ const Login = () => {
         email.current.value,
         password.current.value
       );
-      const user = userCredential.user;
+      navigate("/browse");
     } catch (error) {
       setErrorMessage(GENERIC_ERROR_MESSAGE);
     }
@@ -45,7 +45,7 @@ const Login = () => {
         email.current.value,
         password.current.value
       );
-      const user = userCredential.user;
+      navigate("/browse");
     } catch (error) {
       const errorCode = error.code;
       if (errorCode === INVALID_CREDENTIALS_ERROR_CODE)
@@ -74,7 +74,7 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/fc164b4b-f085-44ee-bb7f-ec7df8539eff/d23a1608-7d90-4da1-93d6-bae2fe60a69b/IN-en-20230814-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+          src={NETFLIX_BACKGROUND_URL}
           alt="Netflix Background"
         ></img>
       </div>

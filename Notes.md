@@ -65,5 +65,22 @@ Setting up Firebase, as well as deploying the frontend web app to Firebase.
 ## Lecture-1 Part-5
 
 Let's now set up authentication using Firebase. We can refer the documentation of Firebase for this, it's quite informative. 
-
 We are able to set up Firebase for both sign in and sign up functionalities. The next step after a user signs in or signs up successfully should be to navigate to '/browse' route, we'll be working on this next.
+
+## Lecture-1 Part-6
+
+Let's work on storing the user information received from the Firebase backend API upon successful sign-in/sign-up in Redux store, as this information will be reused across different components in the web app.
+
+We'll be defining the reducer corresponding to two actions: addUser and removeUser. The action addUser will be dispatched when the user signs in/up succesfully, whereas the action removeUser will be dispatched when the user signs out of the application.
+
+In order to dispatch the actions addUser and removeUser, we can use the following two approaches:
+
+1. Dispatch the specific action in the respective sign-in/up/out flows.
+
+2. Leverage `onAuthStateChanged` from Firebase which is an observer on the auth object. [Documentation](https://firebase.google.com/docs/auth/web/manage-users) 
+
+Anytime the auth object changes due to the user signing in/up/out, the callback function passed to this observer is executed.
+
+The second approach seems better, because it allows us to dispatch the actions in a single flow compared to the first approach where we need to handle dispatch of actions in the respective flows.
+
+Also, one more thing to notice is that `onAuthStateChanged` is an observer (for easier understanding, we can think of it like an event listener). So, it should be executed exactly once. For this, we'll use a useEffect hook with empty dependency array.
