@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "@firebase/auth";
 import Header from "./Header";
 import { validateData } from "../utils/validate";
@@ -13,13 +14,17 @@ import {
   NETFLIX_BACKGROUND_URL,
 } from "../constants";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../slice/userSlice";
+
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
   const user = useRef(null);
-  const email = useRef(null);
+  const emailInput = useRef(null);
   const password = useRef(null);
+  const dispatch = useDispatch();
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
@@ -29,8 +34,16 @@ const Login = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        email.current.value,
+        emailInput.current.value,
         password.current.value
+      );
+      const currentUser = userCredential.user;
+      const { email, uid } = currentUser;
+      const updatedUser = await updateProfile(currentUser, {
+        displayName: user.current.value,
+      });
+      dispatch(
+        addUser({ uid: uid, email: email, displayName: user.current.value })
       );
       navigate("/browse");
     } catch (error) {
@@ -42,7 +55,7 @@ const Login = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
-        email.current.value,
+        emailInput.current.value,
         password.current.value
       );
       navigate("/browse");
@@ -56,8 +69,10 @@ const Login = () => {
 
   const handleButtonClick = () => {
     const validationResult = validateData(
-      email.current.value,
-      password.current.value
+      user?.current?.value,
+      emailInput.current.value,
+      password.current.value,
+      isSignInForm
     );
     if (validationResult instanceof Error) {
       setErrorMessage(validationResult.message);
@@ -73,10 +88,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src={NETFLIX_BACKGROUND_URL}
-          alt="Netflix Background"
-        ></img>
+        <img src={NETFLIX_BACKGROUND_URL} alt="Netflix Background"></img>
       </div>
       <form
         className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80"
@@ -89,12 +101,12 @@ const Login = () => {
           <input
             ref={user}
             type="text"
-            placeholder="Name"
+            placeholder="Username"
             className="p-3 my-3 w-full bg-gray-700"
           />
         )}
         <input
-          ref={email}
+          ref={emailInput}
           type="text"
           placeholder="Email Address"
           className="p-3 my-3 w-full bg-gray-700"
