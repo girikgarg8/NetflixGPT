@@ -13,14 +13,12 @@ import {
   INVALID_CREDENTIALS_ERROR_MESSAGE,
   NETFLIX_BACKGROUND_URL,
 } from "../constants";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../slice/userSlice";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
   const user = useRef(null);
   const emailInput = useRef(null);
   const password = useRef(null);
@@ -45,7 +43,6 @@ const Login = () => {
       dispatch(
         addUser({ uid: uid, email: email, displayName: user.current.value })
       );
-      navigate("/browse");
     } catch (error) {
       setErrorMessage(GENERIC_ERROR_MESSAGE);
     }
@@ -58,7 +55,6 @@ const Login = () => {
         emailInput.current.value,
         password.current.value
       );
-      navigate("/browse");
     } catch (error) {
       const errorCode = error.code;
       if (errorCode === INVALID_CREDENTIALS_ERROR_CODE)

@@ -88,3 +88,36 @@ Also, one more thing to notice is that `onAuthStateChanged` is an observer (for 
 Let's now work on the sign out functionality. We'll show the 'sign out' button on the Browse page after the user logs in. When the user clicks on 'Sign out', we need to dispatch an action to clear the user information from the store, and navigate to the home page.
 
 We'll also work on dispatching an action to store the userName in the store, in the sign up flow.
+
+## Lecture-2 Part-1
+
+We'll work on integrating TMDB (The Movies Database) API in our React App, in order to show movie lists.
+
+Before we do that, we need to work on a few things: setting up a protected route for '/browse' so that the non-logged in user cannot access it. Also, if there's a logged in user and they try to access the '/' route, they should be redirected to '/browse' instead of showing the login form. 
+Another thing: we need to work on a cleanup function to clear the `onAuthStateChanged` observer, once the Header component unmounts. 
+
+We are using the 'Now Playing' API from TMBD for the scope of our project. The documentation of TMDB is quite helpful in this regard.
+
+An important note: StrictMode in React helps to find bugs in components early during development.
+
+Strict Mode enables the following development-only behaviours (and not on production):
+
+- The components will re-render an extra time to find bugs caused by impure rerendering.
+
+- The components will re-run effects an extra time to find bugs caused by missing effect cleanup.
+
+- The components will be checked for usage of deprecated APIs.
+
+For the scope of our project, we can choose to disable React Strict Mode.
+
+## Lecture-2 Part-2
+
+Now that we have the data of movies from TMDB API, we can work on storing this data in the Redux store. We'll create moviesSlice, a slice specifically for storing movies data.
+
+## Lecture-2 Part-3
+
+Let's work on a custom hook for the TMDB API call. It's a good practice to use custom hooks for making API calls because:
+
+1. The custom hook is reusable across different components.
+
+2. The API call logic is separated out from the component logic.
