@@ -32,7 +32,7 @@ We'll start by identifying the requirements and desired features in our frontend
 
 ## NetflixGPT Episode-1 Part-2
 
-We start by creating a bare-bones for the different components like Body, Header, Login and Browse. 
+We start by creating a bare-bones for the different components like Body, Header, Login and Browse.
 
 Let's also set up routing in the application. For now, we'll map the route '/' to Login component and '/browse' route to Browse component. We'll work on making the '/browse' route protected later. In order to set up routing in the React app, we'll leverage React Router DOM Library.
 
@@ -64,7 +64,7 @@ Setting up Firebase, as well as deploying the frontend web app to Firebase.
 
 ## Lecture-1 Part-5
 
-Let's now set up authentication using Firebase. We can refer the documentation of Firebase for this, it's quite informative. 
+Let's now set up authentication using Firebase. We can refer the documentation of Firebase for this, it's quite informative.
 We are able to set up Firebase for both sign in and sign up functionalities. The next step after a user signs in or signs up successfully should be to navigate to '/browse' route, we'll be working on this next.
 
 ## Lecture-1 Part-6
@@ -77,7 +77,7 @@ In order to dispatch the actions addUser and removeUser, we can use the followin
 
 1. Dispatch the specific action in the respective sign-in/up/out flows.
 
-2. Leverage `onAuthStateChanged` from Firebase which is an observer on the auth object. [Documentation](https://firebase.google.com/docs/auth/web/manage-users) 
+2. Leverage `onAuthStateChanged` from Firebase which is an observer on the auth object. [Documentation](https://firebase.google.com/docs/auth/web/manage-users)
 
 Anytime the auth object changes due to the user signing in/up/out, the callback function passed to this observer is executed.
 
@@ -93,8 +93,8 @@ We'll also work on dispatching an action to store the userName in the store, in 
 
 We'll work on integrating TMDB (The Movies Database) API in our React App, in order to show movie lists.
 
-Before we do that, we need to work on a few things: setting up a protected route for '/browse' so that the non-logged in user cannot access it. Also, if there's a logged in user and they try to access the '/' route, they should be redirected to '/browse' instead of showing the login form. 
-Another thing: we need to work on a cleanup function to clear the `onAuthStateChanged` observer, once the Header component unmounts. 
+Before we do that, we need to work on a few things: setting up a protected route for '/browse' so that the non-logged in user cannot access it. Also, if there's a logged in user and they try to access the '/' route, they should be redirected to '/browse' instead of showing the login form.
+Another thing: we need to work on a cleanup function to clear the `onAuthStateChanged` observer, once the Header component unmounts.
 
 We are using the 'Now Playing' API from TMBD for the scope of our project. The documentation of TMDB is quite helpful in this regard.
 
@@ -120,4 +120,29 @@ Let's work on a custom hook for the TMDB API call. It's a good practice to use c
 
 1. The custom hook is reusable across different components.
 
-2. The API call logic is separated out from the component logic.
+2. The API call logic is separated out from the component logic, so it promotes separation of concerns.
+
+3. The hook can be tested separately, and is not tightly coupled with the components.
+
+## Lecture-2 Part-4
+
+Let's now work on building the UI for '/browse' page. Let's start with a high level design first, which will be followed by the low level design:
+
+    - Main Container
+        - Movie Trailer (could be the latest or most trending movie etc.)
+        - Movie Title
+    - Secondary Container
+        - MovieCategory * n (indicates multiple movie categories)
+            - MovieCard * n
+
+## Lecture-2 Part-5
+
+Building Video Title Component
+
+## Lecture-2 Part-6
+
+Building Video Background Component
+
+In order to build the video background component which shows the trailer of movie, we'll leverage the TMDB Videos API. This API takes movie id as a param and returns a list of videos related to the movie. From these list of videos, we'll work on filtering the video which is of type 'Trailer' and display it on the UI. We'll also dispatch an action to store information about this trailer video in the movies slice.
+
+In order to integrate the video with the UI, we embed the iframe from YouTube on the browse page.

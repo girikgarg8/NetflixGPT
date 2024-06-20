@@ -9,11 +9,12 @@ The following set of features that we'll be developing in our project have been 
 - Browse Page (protected route, accessible only after authentication)
 
     - Header
-    - Body Component
-        - Trailer of a movie running in background
-        - Title and description of the trailer movie
-        - Movie Suggestions
-            - Movie Lists of different genres
+    - Main Container
+        - Movie Trailer (could be the latest or most trending movie etc.)
+        - Movie Title
+    - Secondary Container
+        - MovieCategory * n (indicates multiple movie categories)
+        - MovieCard * n
 
 - NetflixGPT Page
 

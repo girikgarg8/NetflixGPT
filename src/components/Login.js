@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -17,6 +17,12 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../slice/userSlice";
 
 const Login = () => {
+  useEffect(() => {
+    document.body.style.overflowY = "hidden";
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  }, []);
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const user = useRef(null);
@@ -82,7 +88,7 @@ const Login = () => {
 
   return (
     <div>
-      <Header />
+      <Header isSignInForm />
       <div className="absolute">
         <img src={NETFLIX_BACKGROUND_URL} alt="Netflix Background"></img>
       </div>

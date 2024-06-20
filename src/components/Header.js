@@ -5,8 +5,8 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../slice/userSlice";
-
-const Header = () => {
+import { clearMoviesSlice } from "../slice/moviesSlice";
+const Header = ({ isSignInForm = false }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -17,6 +17,7 @@ const Header = () => {
         navigate("/browse");
       } else {
         dispatch(removeUser());
+        dispatch(clearMoviesSlice());
         navigate("/");
       }
     });
@@ -34,7 +35,11 @@ const Header = () => {
   }
 
   return (
-    <div className="absolute w-screen px-8 py-2 z-10 bg-gradient-to-b from-black flex justify-between items-center">
+    <div
+      className={`absolute w-screen px-8 py-2 z-10 flex justify-between items-center overflow-y-hidden ${
+        isSignInForm ? "bg-gradient-to-b from-black" : " bg-black"
+      }`}
+    >
       <img className="w-44" src={NETFLIX_LOGO_URL} alt="Netflix Logo" />
       {user && (
         <div className="bg-red-500 h-7 w-20 flex items-center justify-center">
