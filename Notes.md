@@ -146,3 +146,11 @@ Building Video Background Component
 In order to build the video background component which shows the trailer of movie, we'll leverage the TMDB Videos API. This API takes movie id as a param and returns a list of videos related to the movie. From these list of videos, we'll work on filtering the video which is of type 'Trailer' and display it on the UI. We'll also dispatch an action to store information about this trailer video in the movies slice.
 
 In order to integrate the video with the UI, we embed the iframe from YouTube on the browse page.
+
+## Lecture-2 Part-7
+
+Let's now work on building the secondary container, which has the movie categories along with the movie cards for different categories.
+
+In order to show the different movie categories, we'll leverage different TMDB APIs which allow us to retrieve the movie lists for different categories such as 'Popular', 'Top Rated', 'Upcoming' etc.
+
+Further, every movie object in the above said list is associated with an imageID, which is hosted on TMDB CDN. This will help us to build the movie cards.
