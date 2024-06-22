@@ -41,3 +41,9 @@ export const YOUTUBE_ALLOW_OPTIONS =
 
 export const TMDB_SEARCH_MOVIES_API_URL =
   "https://api.themoviedb.org/3/search/movie";
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "en", name: "English" },
+  { identifier: "hindi", name: "Hindi" },
+  { identifier: "spanish", name: "Spanish" },
+];

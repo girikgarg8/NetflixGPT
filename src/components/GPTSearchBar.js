@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
 import groq from "../utils/groq";
 import {
@@ -9,12 +9,16 @@ import {
 } from "../constants";
 import { formGPTQuery } from "../utils/gptQuery";
 import { addGPTMovieResults } from "../slice/gptSlice";
+import language from "../utils/languageConstants";
 
 const GPTSearchBar = () => {
   const searchText = useRef(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [showLoader, setShowLoader] = useState(false);
   const dispatch = useDispatch();
+  const selectedLanguage = useSelector(
+    (store) => store.config.selectedLanguage
+  );
 
   const searchTMDBMovies = async (movieName) => {
     try {
@@ -92,13 +96,13 @@ const GPTSearchBar = () => {
             type="text"
             ref={searchText}
             className="p-4 m-4 col-span-9 rounded-lg"
-            placeholder="What would you like to watch today?"
+            placeholder={language[selectedLanguage].gptSearchPlaceHolder}
           />
           <button
             className="py-2 px-4 bg-red-700 text-white rounded-lg col-span-3 m-4"
             onClick={handleGPTSearchClick}
           >
-            Search
+            {language[selectedLanguage].search}
           </button>
         </form>
       </div>

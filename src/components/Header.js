@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { NETFLIX_LOGO_URL } from "../constants";
+import { NETFLIX_LOGO_URL, SUPPORTED_LANGUAGES } from "../constants";
 import { onAuthStateChanged, signOut } from "@firebase/auth";
 import { auth } from "../utils/firebase";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../slice/userSlice";
 import { clearMoviesSlice } from "../slice/moviesSlice";
 import { clearGPTSlice, toggleShowGPTSearch } from "../slice/gptSlice";
+import { resetLanguage, switchLanguage } from "../slice/configSlice";
 
 const Header = ({ isBrowsePage = false }) => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Header = ({ isBrowsePage = false }) => {
         dispatch(removeUser());
         dispatch(clearMoviesSlice());
         dispatch(clearGPTSlice());
+        dispatch(resetLanguage());
         navigate("/");
       }
     });
@@ -43,6 +45,10 @@ const Header = ({ isBrowsePage = false }) => {
     dispatch(toggleShowGPTSearch());
   };
 
+  const handleLanguageChange = (e) => {
+    dispatch(switchLanguage(e.target.value));
+  };
+
   return (
     <div
       className={`absolute w-screen px-8 py-2 z-10 flex justify-between items-center overflow-y-hidden ${
@@ -50,11 +56,21 @@ const Header = ({ isBrowsePage = false }) => {
       }`}
     >
       <Link to="/">
-        <img className="w-44" src={NETFLIX_LOGO_URL} alt="Netflix Logo" />{" "}
+        <img className="w-44" src={NETFLIX_LOGO_URL} alt="Netflix Logo" />
       </Link>
       {user && (
         <>
           <div className="p-2">
+            {showGPTSearch && (
+              <select
+                className="mr-10 px-2 py-1"
+                onChange={handleLanguageChange}
+              >
+                {SUPPORTED_LANGUAGES.map((language) => (
+                  <option value={language.identifier}> {language.name} </option>
+                ))}
+              </select>
+            )}
             <button
               className="h-9 w-36 bg-purple-600 text-white rounded-lg mr-4"
               onClick={handleGPTButtonClick}

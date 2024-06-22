@@ -155,7 +155,7 @@ In order to show the different movie categories, we'll leverage different TMDB A
 
 Further, every movie object in the above said list is associated with an imageID, which is hosted on TMDB CDN. This will help us to build the movie cards.
 
-## Lecture-3 Part-1
+## Lecture-3
 
 In this lecture, we'll work on integrating GPT API in our project.
 
@@ -179,8 +179,6 @@ The usecase for which we are integrating GPT API in our project is: We'll fetch 
 
 A small note: ChatGPT is a UI interface built on top of GPT APIs. The difference between the two should be clear.
 
-## Lecture-3 Part-2
-
 We'll start by building the GPT Search Page. The header will have a button which redirects to this GPT Search Page.
 
 The GPT Search Component will have two child components: GPT Search Bar and GPT Movie Suggestions.
@@ -194,3 +192,9 @@ We'll leverage the TMDB [Movies Search API](https://developer.themoviedb.org/ref
 Once we have the movie details from TMDB, we can dispatch an action to store it inside the Redux Store.
 
 Let's also discuss memoization in the React App. We can work on memoizing the results of different API calls like get videos of a component. This prevents making API calls everytime the Browse component is re-rendered and since this data is not needed to be fetched again from the server, memoization is a huge performance optimization. In order to implement memoization, we check if the data is already present in the store. If it is, we do not make the network call.
+
+Let's now work on internationalization feature in our React App: let's build this feature in the GPT Search Component.
+
+Websites with page translation feature rank higher in SEO (Search Engine Optimization).
+
+We'll store the information about the selected language in the store. This data can be reused across different components.
