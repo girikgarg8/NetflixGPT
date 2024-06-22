@@ -51,8 +51,8 @@ const Header = ({ isBrowsePage = false }) => {
 
   return (
     <div
-      className={`absolute w-screen px-8 py-2 z-10 flex justify-between items-center overflow-y-hidden ${
-        isBrowsePage ? "bg-black" : "bg-gradient-to-b from-black"
+      className={`fixed w-screen px-8 py-2 z-10 flex flex-col md:flex-row justify-between items-center overflow-y-hidden ${
+        isBrowsePage ? "bg-black browse-header" : "bg-gradient-to-b from-black header"
       }`}
     >
       <Link to="/">
@@ -63,7 +63,7 @@ const Header = ({ isBrowsePage = false }) => {
           <div className="p-2">
             {showGPTSearch && (
               <select
-                className="mr-10 px-2 py-1"
+                className="mr-10 px-2 py-1 language-select"
                 onChange={handleLanguageChange}
               >
                 {SUPPORTED_LANGUAGES.map((language) => (
@@ -71,19 +71,19 @@ const Header = ({ isBrowsePage = false }) => {
                 ))}
               </select>
             )}
-            <button
-              className="h-9 w-36 bg-purple-600 text-white rounded-lg mr-4"
-              onClick={handleGPTButtonClick}
-            >
-              {showGPTSearch ? "Home Page" : "GPT Search"}
-            </button>
-            <button
-              className="bg-red-500 h-9 w-20 text-white rounded-lg ml-4"
-              onClick={handleSignOut}
-            >
-              Sign Out
-            </button>
-          </div>
+              <button
+                className="h-9 w-36 bg-purple-600 text-white rounded-lg mr-4 gpt-search-button"
+                onClick={handleGPTButtonClick}
+              >
+                {showGPTSearch ? "Home Page" : "GPT Search"}
+              </button>
+              <button
+                className="bg-red-500 h-9 w-20 text-white rounded-lg ml-4 sign-out-button"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </button>
+            </div>
         </>
       )}
     </div>

@@ -6,9 +6,9 @@ const MovieList = ({ title, movies }) => {
 
   return (
     <div className="px-6 bg-black bg-opacity-70 text-white">
-      <h1 className="text-2xl py-6"> {title} </h1>
+      <h1 className="text-lg md:text-2xl py-6"> {title} </h1>
       <div className="flex overflow-x-auto">
-        <div className="flex mt-2">
+        <div className="flex my-4">
           {movies.map((movie) => (
             <MovieCard
               imageID={movie.poster_path}

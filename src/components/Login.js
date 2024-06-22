@@ -84,10 +84,14 @@ const Login = () => {
     <div>
       <Header />
       <div className="fixed">
-        <img src={NETFLIX_BACKGROUND_URL} alt="Netflix Background"></img>
+        <img
+          src={NETFLIX_BACKGROUND_URL}
+          alt="Netflix Background"
+          className="background-image"
+        ></img>
       </div>
       <form
-        className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80"
+        className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80 sign-in-form"
         onSubmit={(e) => e.preventDefault()}
       >
         <h1 className="font-bold text-3xl py-4">

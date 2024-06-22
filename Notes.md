@@ -198,3 +198,7 @@ Let's now work on internationalization feature in our React App: let's build thi
 Websites with page translation feature rank higher in SEO (Search Engine Optimization).
 
 We'll store the information about the selected language in the store. This data can be reused across different components.
+
+## Responsiveness of the app for mobile view
+
+We'll work on ensuring the responsiveness of the app for different screen sizes.

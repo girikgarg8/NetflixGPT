@@ -15,14 +15,19 @@ const GPTSearch = () => {
     };
   }, [dispatch]);
 
-
   return (
     <>
       <div className="fixed -z-10">
-        <img src={NETFLIX_BACKGROUND_URL} alt="Netflix Background"></img>
+        <img
+          src={NETFLIX_BACKGROUND_URL}
+          className="background-image"
+          alt="Netflix Background"
+        ></img>
       </div>
-      <GPTSearchBar />
-      <GPTMovieSuggestions />
+      <div className="gpt-search-bar">
+        <GPTSearchBar />
+        <GPTMovieSuggestions />
+      </div>
     </>
   );
 };
