@@ -132,7 +132,7 @@ Let's now work on building the UI for '/browse' page. Let's start with a high le
         - Movie Trailer (could be the latest or most trending movie etc.)
         - Movie Title
     - Secondary Container
-        - MovieCategory * n (indicates multiple movie categories)
+        - MovieList * n (indicates multiple movie list)
             - MovieCard * n
 
 ## Lecture-2 Part-5
@@ -154,3 +154,43 @@ Let's now work on building the secondary container, which has the movie categori
 In order to show the different movie categories, we'll leverage different TMDB APIs which allow us to retrieve the movie lists for different categories such as 'Popular', 'Top Rated', 'Upcoming' etc.
 
 Further, every movie object in the above said list is associated with an imageID, which is hosted on TMDB CDN. This will help us to build the movie cards.
+
+## Lecture-3 Part-1
+
+In this lecture, we'll work on integrating GPT API in our project.
+
+A brief about GPT :
+
+GPT stands for Generative Pre-trained Transformer and refers to a family of large language models (LLMs) that can understand and generate text in natural language.
+
+Let's break down the acronym:
+
+Generative: Generative AI is a technology capable of producing content, such as text and imagery.
+
+Pre-trained: Pre-trained models are saved networks that have already been taught, using a large data set, to resolve a problem or accomplish a specific task.
+
+Transformer: A transformer is a deep learning architecture that transforms an input into another type of output.
+
+Breaking down the acronym above helps us remember what GPT does and how it works. GPT is a generative AI technology that has been previously trained to transform its input into a different type of output.
+
+OpenAI GPT APIs are paid in nature, instead we can the GPT APIs provided by Groq. Refer this [documentation](https://console.groq.com/docs/quickstart) for steps on how to set up the GPT APIs in the project.
+
+The usecase for which we are integrating GPT API in our project is: We'll fetch the recommendations from GPT for movies based on the prompt entered by the user. (As an example, "Funny Hollywood movies from 1980s"). Once we do that, we'll get the movie details from TMDB API and show the movie posters on the UI.
+
+A small note: ChatGPT is a UI interface built on top of GPT APIs. The difference between the two should be clear.
+
+## Lecture-3 Part-2
+
+We'll start by building the GPT Search Page. The header will have a button which redirects to this GPT Search Page.
+
+The GPT Search Component will have two child components: GPT Search Bar and GPT Movie Suggestions.
+
+By default, GPT prevents from making API calls from the frontend (browser like environments), as it risks exposing secret API credentials to attackers.
+
+The best practice to make the API call would be to do it through a backend service. However, if we wish to do it through the frontend, we can do so by setting `dangerouslyAllowedBrowser` to true.
+
+We'll leverage the TMDB [Movies Search API](https://developer.themoviedb.org/reference/search-movie), which allows to search the movies by movie name.
+
+Once we have the movie details from TMDB, we can dispatch an action to store it inside the Redux Store.
+
+Let's also discuss memoization in the React App. We can work on memoizing the results of different API calls like get videos of a component. This prevents making API calls everytime the Browse component is re-rendered and since this data is not needed to be fetched again from the server, memoization is a huge performance optimization. In order to implement memoization, we check if the data is already present in the store. If it is, we do not make the network call.

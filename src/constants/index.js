@@ -30,3 +30,14 @@ export const TMDB_TOP_RATED_MOVIES_API_URL =
 
 export const TMDB_UPCOMING_MOVIES_API_URL =
   "https://api.themoviedb.org/3/movie/upcoming?language=en-US";
+
+export const GROQ_GPT_MODEL = "llama3-8b-8192";
+
+export const YOUTUBE_VIDEO_OPTIONS =
+  "?enablejsapi=1&autoplay=1&mute=1&controls=0&showinfo=0&autohide=1&modestbranding=1&rel=0&iv_load_policy=3&loop=1&playlist=";
+
+export const YOUTUBE_ALLOW_OPTIONS =
+  "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+
+export const TMDB_SEARCH_MOVIES_API_URL =
+  "https://api.themoviedb.org/3/search/movie";

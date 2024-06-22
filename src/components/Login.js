@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -17,12 +17,6 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../slice/userSlice";
 
 const Login = () => {
-  useEffect(() => {
-    document.body.style.overflowY = "hidden";
-    return () => {
-      document.body.style.overflowY = "auto";
-    };
-  }, []);
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const user = useRef(null);
@@ -43,7 +37,7 @@ const Login = () => {
       );
       const currentUser = userCredential.user;
       const { email, uid } = currentUser;
-      const updatedUser = await updateProfile(currentUser, {
+      await updateProfile(currentUser, {
         displayName: user.current.value,
       });
       dispatch(
@@ -56,7 +50,7 @@ const Login = () => {
 
   async function signIn() {
     try {
-      const userCredential = await signInWithEmailAndPassword(
+      await signInWithEmailAndPassword(
         auth,
         emailInput.current.value,
         password.current.value
@@ -88,8 +82,8 @@ const Login = () => {
 
   return (
     <div>
-      <Header isSignInForm />
-      <div className="absolute">
+      <Header />
+      <div className="fixed">
         <img src={NETFLIX_BACKGROUND_URL} alt="Netflix Background"></img>
       </div>
       <form

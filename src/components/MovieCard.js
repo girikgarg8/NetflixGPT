@@ -1,10 +1,17 @@
 import React from "react";
-import { TMDB_IMAGE_CDN_URL } from "../constants";
+import { GOOGLE_SEARCH_URL, TMDB_IMAGE_CDN_URL } from "../constants";
 
-const MovieCard = ({ imageID }) => {
+const MovieCard = ({ imageID, searchQuery }) => {
+  if (!imageID) return;
   return (
     <div className="w-48 pr-5">
-      <img alt="Movie Card" src={TMDB_IMAGE_CDN_URL + imageID} />
+      <a
+        href={GOOGLE_SEARCH_URL + searchQuery}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img alt="Movie Card" src={TMDB_IMAGE_CDN_URL + imageID} />
+      </a>
     </div>
   );
 };

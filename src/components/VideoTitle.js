@@ -16,7 +16,11 @@ const VideoTitle = ({ title, overview }) => {
 
   const handleKnowMoreButtonClick = () => {
     const searchQuery = title.split(" ").join("+");
-    window.open(GOOGLE_SEARCH_URL + searchQuery);
+    window.open(
+      GOOGLE_SEARCH_URL + searchQuery,
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   return (

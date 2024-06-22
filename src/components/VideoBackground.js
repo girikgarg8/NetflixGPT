@@ -1,7 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import useMovieTrailer from "../hooks/useMovieTrailer";
-import { YOUTUBE_EMBED_URL } from "../constants";
+import {
+  YOUTUBE_ALLOW_OPTIONS,
+  YOUTUBE_EMBED_URL,
+  YOUTUBE_VIDEO_OPTIONS,
+} from "../constants";
 
 const VideoBackground = ({ movieID }) => {
   useMovieTrailer(movieID);
@@ -16,12 +20,11 @@ const VideoBackground = ({ movieID }) => {
           src={
             YOUTUBE_EMBED_URL +
             trailer.key +
-            "?enablejsapi=1&autoplay=1&mute=1&controls=0&showinfo=0&autohide=1&modestbranding=1&rel=0&iv_load_policy=3&loop=1&playlist=" +
+            YOUTUBE_VIDEO_OPTIONS +
             trailer.key
           }
           title="YouTube Video Player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
+          allow={YOUTUBE_ALLOW_OPTIONS}
         ></iframe>
       )}
     </div>

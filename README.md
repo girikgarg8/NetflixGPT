@@ -13,10 +13,16 @@ The following set of features that we'll be developing in our project have been 
         - Movie Trailer (could be the latest or most trending movie etc.)
         - Movie Title
     - Secondary Container
-        - MovieCategory * n (indicates multiple movie categories)
+        - MovieList * n (indicates multiple movie lists)
         - MovieCard * n
 
 - NetflixGPT Page
 
     - Search Bar
     - Movie Suggestions
+
+Video Demo: TODO
+
+Screenshots: TODO
+
+Live Link: [Here](https://netflixgpt-85718.web.app/)
