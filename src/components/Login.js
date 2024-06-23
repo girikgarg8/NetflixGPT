@@ -30,6 +30,7 @@ const Login = () => {
 
   async function signUp() {
     try {
+      const displayName = user.current.value;
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         emailInput.current.value,
@@ -40,9 +41,7 @@ const Login = () => {
       await updateProfile(currentUser, {
         displayName: user.current.value,
       });
-      dispatch(
-        addUser({ uid: uid, email: email, displayName: user.current.value })
-      );
+      dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
     } catch (error) {
       setErrorMessage(GENERIC_ERROR_MESSAGE);
     }
